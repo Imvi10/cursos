@@ -11,6 +11,7 @@ class UsuarioController {
 
     private $response = array(
         'return' => TRUE,       //Indica si el metodo debe devolver un valor
+        'status'=> FALSE,        //Indica si el metodo se realizo correctamente o hubo un error
         'message'=>'Empty',     //Mensaje de respuesta en caso de existir
         'data'=>array()         //Datos que devuelve el metodo, si aplica
     );
@@ -47,8 +48,10 @@ class UsuarioController {
             
             if($userArray!=null){
                 $_SESSION['user']=$user;
+                $this->response['status']=TRUE;
                 $this->response['data']=TRUE;
             } else{
+                $this->response['status']=FALSE;
                 $this->response['data']=FALSE;
                 $this->response['message']='Datos incorrectos';
             }
@@ -62,8 +65,10 @@ class UsuarioController {
             $user = new Usuario($userArray);
             $user->setPass($user->getPass());
             if($user->add()){
+                $this->response['status']=TRUE;
                 $this->response['message']='Usuario insertado correctamente';
             } else{
+                $this->response['status']=FALSE;
                 $this->response['message']='Usuario no insertado';
             }
             
@@ -81,6 +86,7 @@ class UsuarioController {
     public function getAllTable() {
         $usuarios = Usuario::getAllTable();
 
+        $this->response['status']=TRUE;
         $this->response['data']=$usuarios;
         return $this->response;
     }
