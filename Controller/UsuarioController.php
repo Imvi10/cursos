@@ -32,8 +32,11 @@ class UsuarioController {
                 $this->getAllTable();
                 return $this->response;
                 break;
+            case "get":
+                $this->get();
+                return $this->response;
+                break;
             default :
-                $this->showInvalidMethodMessage();
                 break;
         }
     }
@@ -90,9 +93,24 @@ class UsuarioController {
         $this->response['data']=$usuarios;
         return $this->response;
     }
-
-    private function showInvalidMethodMessage() {
+    
+    public function get($id=0){
+        if(isset($_POST)){
+            $id=$_POST['id'];
+        }
         
+//        Print_r($_POST);
+        
+        $user=  Usuario::get($id);
+//        print_r($user);
+        if($user!=NULL){
+            $this->response['status']=TRUE;
+            $this->response['data']= ($user);
+        } else{
+            $this->response['status']=FALSE;
+            $this->response['message']='Error al consultar usuario';
+        }
+        return $this->response;
     }
 
     private function cleanString($string) {

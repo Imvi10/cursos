@@ -5,7 +5,7 @@ namespace Model;
 use DB\DBConnection;
 
 class Usuario {
-
+    //para la proxima crear una propiedad con el nombre de la tabla
     private $id;
     private $idTipo;
     private $correo;
@@ -114,6 +114,31 @@ class Usuario {
 
             if ($row = mysqli_fetch_assoc($result)) {
                 $user=$row;
+            } else{
+                $user=null;
+            }
+
+        } else{
+            $user=null;
+        }
+        
+        return $user;
+    }
+    
+    //nuevas
+    
+    public static function get($id){
+        $connection = DBConnection::getConnection();
+        $user=NULL;
+        
+        $query="SELECT * FROM usuarios "
+                . "WHERE activo=1 "
+                . "AND id=$id;";
+        
+        if (@$result = mysqli_query($connection, $query)) {
+
+            if ($row = mysqli_fetch_assoc($result)) {
+                $user=($row);
             } else{
                 $user=null;
             }
