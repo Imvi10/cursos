@@ -13,14 +13,13 @@ class Linker {
     }
 
     public static function getModel() {
-        require '/wamp/www/Modulo_Alumnos_Git/cursos/Model/DBConnection.php';
-        require '/wamp/www/Modulo_Alumnos_Git/cursos/Model/Usuario.php';
-        require '/wamp/www/Modulo_Alumnos_Git/cursos/Model/Propuesta.php';
+        require '/wamp/www/Modulo_Alumnos/Model/DBConnection.php';
+        require '/wamp/www/Modulo_Alumnos/Model/Usuario.php';
+        require '/wamp/www/Modulo_Alumnos/Model/Propuesta.php';
     }
 
     public static function getController() {
-        require '/wamp/www/Modulo_Alumnos_Git/cursos/Controller/UsuarioController.php';
-        
+        require '/wamp/www/Modulo_Alumnos/Controller/UsuarioController.php';
     }
 
 }

@@ -41,47 +41,13 @@ $controller=new UsuarioController()
                     if (response != null) {
                         response = JSON.parse(response);
                         if (response.return == true) {
-                            console.log(response.message) //ESTA MADRE VA EN UN ALERT BIEN CHIDO
                             cleanInputs()
                         } else {
 //                            showStatus(response);
-                            console.log(response.message)
+                            console.log(response.message) //ESTA MADRE VA EN UN ALERT BIEN CHIDO
                         }
                     } else {
                         console.log(response)
-                    }
-
-                });
-            }
-            
-            function loadUser(id){
-                var user={};
-                
-                $.ajax({
-                    type: 'POST',
-                    url: "Controller/controllerRouter.php",
-                    data: {
-                        target: 'Usuario',
-                        method: 'get',
-                        id: id
-                    },
-                    context: document.body
-                }).done(function(response) {
-                    console.log(response);
-                    if (response != null) {
-                        response = JSON.parse(response);
-//                        alert(response.data.correo);
-                        if (response.return == true && response.status==true) {
-                            user=response.data;
-                            $("#txtid").val(""+user.id);
-                            $("#txtCorreo").val(user.correo);
-                            
-                        } else {
-//                            showStatus(response);
-                            console.log(response.message);
-                        }
-                    } else {
-                        console.log(response);
                     }
 
                 });
@@ -100,7 +66,7 @@ $controller=new UsuarioController()
 
                 <!-- Form Name -->
                 <legend>Agregar Usuario</legend>
-                <input id="txtid" name="txtid" type="hidden" >
+
                 <!-- Select Basic -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="slctIdTipoUsuario">Tipo usuario</label>
@@ -188,11 +154,10 @@ $controller=new UsuarioController()
                     echo '<td>'.$user['correo'].'</td>';
                     echo '<td>'.$user['nombre'].'</td>';
                     echo '<td>'.$user['tipo'].'</td>';
-                    echo '<td><button class="btn-warning" onclick="loadUser('.$user['id'].')">Editar</button></td>';
+                    echo '<td><button class="btn-warning" onclick="loadUser('.$user['tipo'].')">Editar</button></td>';
                     
                     echo '</tr>';
                 }
-                
                 ?>
             </table>
         </div>

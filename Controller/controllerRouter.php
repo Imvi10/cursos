@@ -12,7 +12,11 @@ if (isset($_POST['target'])){
     
     switch ($_POST['target']){
         case "Propuesta":
+            $controller = new PropuestaController();
             break;
+        case "Categoria":
+            $controller = new CategoriaController();
+        break;
         //...
         case "Usuario":
             $controller=new UsuarioController();
